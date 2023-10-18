@@ -145,8 +145,8 @@ st.write(nutri.describe())
 st.markdown("## Section 1: Nutrition Quick View and Breakdown")
 #tab1, tab2, tab3= st.tabs(["Do you really know your food?", "Macronutrients, Calories and Cholesterol",
 #                                   "Minerals and Vitamins"])
-tab2, tab3= st.tabs(["Macronutrients vs Calories",
-                                   "Minerals and Vitamins"])
+tab2, tab3= st.tabs(["🤸‍♂️Macronutrients vs Calories",
+                                   "🍊Minerals and Vitamins"])
 with tab2:
     st.write("""🍞 Macronutrients are nutrients that we need in large amounts. 
               """) 
@@ -171,7 +171,7 @@ with tab3:
              However, these micronutrients are not produced in our bodies and must be derived from the food we eat.
              A good strategy should involve opting for food variety, let's see the top micronutrients dense food that you can
              consider adding to your diet.🥗🪙""") 
-    min_on = st.toggle('I want the Essential Minerals!',value=True)
+    min_on = st.toggle('🙋‍♂️I want the Essential Minerals!',value=True)
     if min_on:
         min_sel = st.selectbox("Which Essential Minerals do you care about?", minerals)
 
@@ -197,7 +197,7 @@ with tab3:
 
 
 
-    vit_on = st.toggle('I want the Vital Vitamins!',value=True)
+    vit_on = st.toggle('🙋‍♀️I want the Vital Vitamins!',value=True)
     if vit_on:
         vit_sel = st.selectbox("Which Vital Vitamins do you care about?", vitamins)
         vit_num = st.number_input("Show me the top: ", min_value=0, step=1, value=10)
@@ -220,10 +220,11 @@ with tab3:
         else:
             st.write('Nothing have been selected!')
 
-    both_on = st.toggle('I need both!')
-    st.write("""Pick each side of the Macronutrients and pan over the scatter range to see what is some of the sample food types
-             that satisfy your specification. 🔍""")  
+    both_on = st.toggle('🤩I need both!', value=True)
+ 
     if both_on:
+        st.write("""Pick each side of the Macronutrients and pan over the scatter range to see what is some of the sample food types
+                that satisfy your specification. 🔍""") 
         vit_pick = st.selectbox('Choose your Macronutrients:', vitamins)
         min_pick = st.selectbox('Choose your Macronutrients:', minerals)
 
@@ -231,38 +232,46 @@ with tab3:
 
         points = alt.Chart(nutri).mark_point().encode(
             x= vit_pick +':Q',
-            y= min_pick +':Q'
+            y= min_pick +':Q',
+            color=alt.Color('Description').legend(None)
         ).add_params(
             brush
         )
 
         vit_pick = alt.Chart(nutri).mark_bar().encode(
             x=alt.X('Description:N', sort='-y'),
-            y=vit_pick+':Q'
+            y=vit_pick+':Q',
+            color=alt.Color('Description').legend(None)
         ).transform_filter(
             (brush) 
         ).transform_window(
             rank='rank(vit_pick)',
             sort=[alt.SortField(vit_pick, order='descending')]
-        ).transform_sample(10)
+        ).transform_sample(15).properties(
+                    width=200,
+                    height=150
+                )
 
         min_pick = alt.Chart(nutri).mark_bar().encode(
             x=alt.X('Description:N', sort='-y'),
-            y=min_pick+':Q'
+            y=min_pick+':Q',
+            color=alt.Color('Description').legend(None)
         ).transform_filter(
             (brush) 
         ).transform_window(
             rank='rank(min_pick)',
             sort=[alt.SortField(min_pick, order='descending')]
-        ).transform_sample(10)
-
+        ).transform_sample(15).properties(
+                    width=200,
+                    height=150
+                )
         fig5 = points & (vit_pick | min_pick)
         st.altair_chart(fig5, use_container_width=True)
 
 #Section 2: The Bad Guys
 
 st.markdown("## Section 2: The Real Bad Guys?")
-tab4, tab5= st.tabs(["Not All Fat is Bad","Sweet sweet life!"])
+tab4, tab5= st.tabs(["🙊Not All Fat is Bad","🍨Sweet sweet life!"])
 with tab4:
     st.write("""The most horrendous type of Fat there are is trans fats. 
              Trans fats have no known health benefits and that there is no safe level of consumption.
@@ -327,13 +336,14 @@ with tab5:
              Yet again, not all sugars are created equally, there's not much that we can go wrong with the natural, complex carbohydrates 
              in whole food. However, the simple one, especially those added to your food just for the sake of tatse and shelf-life, these should be avoided.""")
     
-    st.write("We added labels that include colour coding allow you to see at a glance if the food has a high, medium or low amount of sugars:")
+    st.markdown("We added labels that include colour coding allow you to see at a glance if the food has a $${\color{red}high}$$, $${\color{orange}medium}$$ or $${\color{green}low} amount of sugars:")
 
-    st.write("      red = high (more than 22.5g of sugar per 100g or more than 27g per portion)")
+    st.markdown("      * $${\color{red}Red}$$ = $${\color{red}High}$$  (more than 22.5g of sugar per 100g or more than 27g per portion)")
 
-    st.write("      amber = medium (more than 5g but less than or equal to 22.5g of sugar per 100g)")
+    st.markdown("      * $${\color{orange}Amber}$$ = $${\color{orange}Medium}$$ (more than 5g but less than or equal to 22.5g of sugar per 100g)")
 
-    st.write("      green = low (less than or equal to 5g of sugar per 100g)")
+    st.markdown("      * $${\color{green}Green}$$ = $${\color{green}Low}$$ (less than or equal to 5g of sugar per 100g)")
+
     st.write("""With that, watch out the the sugar dense food but low in fiber, this should be the sign that the sugar comes
              mainly from processing origin. Pan over the region you think is dangerous and should be avoived, the top food with highest
              percentage of sugar but lowest amount of fiber should pop up. Let's see who these bad guys are:🦹""")
@@ -366,8 +376,10 @@ with tab5:
         color=alt.Color('Sugar Label').scale(domain=dom, range=colo).legend(orient="left"),
         tooltip=['Description', 'Total Sugar (g)', 'Total Fiber (g)', 'Carbohydrate (g)']
         #color=alt.Color('Sugar Label').legend(orient="left")
-        ).add_params(brush)
-
+        ).add_params(brush).properties(
+            width=400,
+            height=350
+                )
     # Base chart for data tables
     ranked_text = alt.Chart(sugar_df).mark_text(align='right').encode(
         y=alt.Y('row_number:O', axis=None)
@@ -382,13 +394,14 @@ with tab5:
 
     # Data Tables
     food = ranked_text.encode(text='Description:N').properties(
-        title=alt.Title(text='Description', align='right')
+        title=alt.Title(text='Description', align='right'), width=100
     )
+
     tsu = ranked_text.encode(text='Total Sugar (g):N').properties(
-        title=alt.Title(text='Total Sugar (g)', align='right')
+        title=alt.Title(text='Total Sugar (g)', align='right'), width=100
     )
     tfu = ranked_text.encode(text='Total Fiber (g):N').properties(
-        title=alt.Title(text='Total Fiber (g)', align='left')
+        title=alt.Title(text='Total Fiber (g)', align='left'), width=100
     )
     text = alt.hconcat(food, tsu, tfu) # Combine data tables
 
