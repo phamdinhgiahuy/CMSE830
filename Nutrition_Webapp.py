@@ -10,6 +10,19 @@ from PIL import Image
 import altair as alt
 
 
+with st.sidebar:
+    st.markdown("## Contents")
+
+    st.markdown("    1. [👋 Welcome to your zero cost Nutritional stop](#why-you-should-care) ")  
+
+    st.markdown("    2. [🍝 Chapter 1: Nutritions, what are they?](#section-1-nutrition-quick-view-and-breakdown)") 
+
+    st.markdown("    3. [🤷‍♂️ Chapter 2: The Good, The Bad and the In-Between.](#section-2-the-real-bad-guys)")   
+
+    st.markdown("Huy Pham - CMSE 830 🌟")                     
+
+    #st.sidebar.markdown("You can **change** the values to change the *chart*.")
+
 #Load dataset
 nutri_ori = pd.read_csv('Food_nutrition.csv').drop(columns=['index']).dropna()
 nutri = nutri_ori#[:1000]
@@ -97,31 +110,31 @@ fat = [col for col in nutri.columns if col.find('Fat') != -1]
 #Section 1: Quick View and Breakdown
 st.header("🍴Exploring Food Nutritional Content for a Healthier Lifestyle ")
 
-with st.expander("Start Here"):
-    st.write("""🔬Understanding the nutritional content of the food we 
-             consume on a daily basis is essential for making informed dietary decisions. 
-             The goal of this project is to create a web application that leverages a dataset called
-               "The Nutritional Content of Food" to help all of us make healthier dietary choices by 
-               providing easy access to essential nutritional information. """)
-    image = Image.open('brain-with-fruits-concept.webp')
-    st.image(image)
-    st.write("""🏋️‍♂️You may think "Hey, I am not a gym rat and I would rather 
-             die a couple of years earlier and savor my favorite dishes than survive on 
-             the miserable combination of veggies and chicken breast." Completely understandable! 
-             But this project intends to equip you with an informative and user-friendly tool to make 
-             healthier food decisions and you will soon learn that there are several options from decent 
-             to good to superb that you can choose from""")
-    
-    st.write("""There are 2 main Sections in this first stage of the Poject (⚒️Construction in progress!): 
-             Section 1 is "Nutrition Quick View and Breakdown" and we will explore fundamentals elements of food nutrition.
-             Section 2 is "The Real Bad Guys" and we will find out the real sneaky culprit 🕵️ that may potential undermine our 
-             healthy dietary goal!""") 
-    st.write("""But first, let's get you gear up by peaking at the dataset and see what it has to offer.""")
+st.markdown("## Why you should care?")
+st.write("""🔬Understanding the nutritional content of the food we 
+            consume on a daily basis is essential for making informed dietary decisions. 
+            The goal of this project is to create a web application that leverages a dataset called
+            "The Nutritional Content of Food" to help all of us make healthier dietary choices by 
+            providing easy access to essential nutritional information. """)
+image = Image.open('brain-with-fruits-concept.webp')
+st.image(image)
+st.write("""🏋️‍♂️You may think "Hey, I am not a gym rat and I would rather 
+            die a couple of years earlier and savor my favorite dishes than survive on 
+            the miserable combination of veggies and chicken breast." Completely understandable! 
+            But this project intends to equip you with an informative and user-friendly tool to make 
+            healthier food decisions and you will soon learn that there are several options from decent 
+            to good to superb that you can choose from""")
 
-    st.write("Data Sample")         
-    st.write(nutri.head(10))
-    st.write("Data summary")
-    st.write(nutri.describe())
+st.write("""There are 2 main Sections in this first stage of the Poject (⚒️Construction in progress!): 
+            Section 1 is "Nutrition Quick View and Breakdown" and we will explore fundamentals elements of food nutrition.
+            Section 2 is "The Real Bad Guys" and we will find out the real sneaky culprit 🕵️ that may potential undermine our 
+            healthy dietary goal!""") 
+st.write("""But first, let's get you gear up by peaking at the dataset and see what it has to offer.""")
+
+st.write("Data Sample")         
+st.write(nutri.head(10))
+st.write("Data summary")
+st.write(nutri.describe())
 
 
 #Food lookup:
@@ -129,7 +142,7 @@ with st.expander("Start Here"):
 
 #Section 1: Quick View and Breakdown
 
-st.subheader("Section 1: Nutrition Quick View and Breakdown")
+st.markdown("## Section 1: Nutrition Quick View and Breakdown")
 #tab1, tab2, tab3= st.tabs(["Do you really know your food?", "Macronutrients, Calories and Cholesterol",
 #                                   "Minerals and Vitamins"])
 tab2, tab3= st.tabs(["Macronutrients vs Calories",
@@ -248,7 +261,7 @@ with tab3:
 
 #Section 2: The Bad Guys
 
-st.subheader("Section 2: The Real Bad Guys?")
+st.markdown("## Section 2: The Real Bad Guys?")
 tab4, tab5= st.tabs(["Not All Fat is Bad","Sweet sweet life!"])
 with tab4:
     st.write("""The most horrendous type of Fat there are is trans fats. 
@@ -319,7 +332,7 @@ with tab5:
     st.write("      red = high (more than 22.5g of sugar per 100g or more than 27g per portion)")
 
     st.write("      amber = medium (more than 5g but less than or equal to 22.5g of sugar per 100g)")
-    
+
     st.write("      green = low (less than or equal to 5g of sugar per 100g)")
     st.write("""With that, watch out the the sugar dense food but low in fiber, this should be the sign that the sugar comes
              mainly from processing origin. Pan over the region you think is dangerous and should be avoived, the top food with highest
