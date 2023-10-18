@@ -211,7 +211,7 @@ with tab3:
                 x=alt.X('Description:N', sort='-y'),
                 y=vit_sel+':Q'
             ).transform_window(
-                rank='rank(min_sel)',
+                rank='rank(min_sel)', 
                 sort=[alt.SortField(vit_sel, order='descending')]
             ).transform_filter(
                 (alt.datum.rank < vit_num)
@@ -244,9 +244,6 @@ with tab3:
             color=alt.Color('Description').legend(None)
         ).transform_filter(
             (brush) 
-        ).transform_window(
-            rank='rank(vit_pick)',
-            sort=[alt.SortField(vit_pick, order='descending')]
         ).transform_sample(15).properties(
                     width=200,
                     height=150
@@ -258,9 +255,6 @@ with tab3:
             color=alt.Color('Description').legend(None)
         ).transform_filter(
             (brush) 
-        ).transform_window(
-            rank='rank(min_pick)',
-            sort=[alt.SortField(min_pick, order='descending')]
         ).transform_sample(15).properties(
                     width=200,
                     height=150
