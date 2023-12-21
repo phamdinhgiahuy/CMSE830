@@ -19,7 +19,7 @@ with st.sidebar:
 
     st.markdown("    3. [🤷‍♂️ Chapter 2: The Good, The Bad and the In-Between.](#section-2-the-real-bad-guys)")   
 
-    st.markdown("Huy Pham - CMSE 830 🌟")                     
+    st.markdown("Huy Pham 🌟")                     
 
     #st.sidebar.markdown("You can **change** the values to change the *chart*.")
 
@@ -330,7 +330,7 @@ with tab5:
              Yet again, not all sugars are created equally, there's not much that we can go wrong with the natural, complex carbohydrates 
              in whole food. However, the simple one, especially those added to your food just for the sake of tatse and shelf-life, these should be avoided.""")
     
-    st.markdown("We added labels that include colour coding allow you to see at a glance if the food has a $${\color{red}high}$$, $${\color{orange}medium}$$ or $${\color{green}low} amount of sugars:")
+    st.markdown("We added labels that include colour coding allow you to see at a glance if the food has a $${\color{red}high}$$, $${\color{orange}medium}$$ or $${\color{green}low}$$ amount of sugars:")
 
     st.markdown("      * $${\color{red}Red}$$ = $${\color{red}High}$$  (more than 22.5g of sugar per 100g or more than 27g per portion)")
 
